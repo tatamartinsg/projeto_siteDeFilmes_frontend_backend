@@ -1,40 +1,55 @@
 <template>
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src=".../800x400?auto=yes&bg=777&fg=555&text=Primeiro Slide" alt="Primeiro Slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src=".../800x400?auto=yes&bg=666&fg=444&text=Segundo Slide" alt="Segundo Slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src=".../800x400?auto=yes&bg=555&fg=333&text=Terceiro Slide" alt="Terceiro Slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Anterior</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Próximo</span>
-  </a>
-</div>
-    
-</template>
-<script>
-    export default{
-        data(){
-            return{
+    <b-container>
 
-            }
-        }
+        <hr />
+
+        <b-carousel
+            controls
+            indicators
+            img-width="1024"
+            img-height="480"
+            :interval="3000"
+            v-model="slide"
+        >
+            <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=10"
+                caption="First slide"
+                text="Hello World, small text here!"
+            ></b-carousel-slide>
+            <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=11">
+                <h1>Hello World!</h1>
+            </b-carousel-slide>
+            <b-carousel-slide>
+                <template v-slot:img>
+                    <img class="d-block img-fluid w-100" width="1024" height="480" src="https://picsum.photos/2048/960/?image=12" />
+                </template>
+            </b-carousel-slide>
+            <b-carousel-slide caption="Blank image" img-blank style="background: lightskyblue;">
+                <p>
+                    My custom slide whitout eny image here!
+                </p>
+            </b-carousel-slide>
+            <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=14"></b-carousel-slide>
+        </b-carousel>
+
+    </b-container>
+</template>
+
+<script>
+export default {
+  name: 'Home',
+  props:{
+      status:{
+          type: String,
+          required: true
+      }
+  },
+  data () {
+    return {
+        slide: 3
     }
+  },
+
+  methods: {
+  }
+}
 </script>
-<style scoped>
-</style>

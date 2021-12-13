@@ -1,6 +1,6 @@
 <template>
     <div>
-        
+        <my-carousel></my-carousel>
         <h2>Teste</h2>
         <!-- <input class="form-control mr-sm-2" type="search" placeholder="filtre por parte do título de uma série ou filme" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
@@ -21,13 +21,19 @@
 </template>
 <script>
     import axios from 'axios'
+    import Carousel from './Carousel/Carousel.vue'
+
     export default{
+        components:{
+            'my-carousel': Carousel,
+        },
         data(){
             return{
                 path:"",
                 fotos: [],
                 filtro: "",
-                input: ""
+                input: "",
+                status: []
             }
          
         },
@@ -36,7 +42,6 @@
             let promise = axios.get('http://localhost:8081/tv')
             promise.then(response => {
                 this.fotos = response.data.response
-                console.log(this.fotos)
             })
                 .catch(error => { console.log(error) })
         },
@@ -73,9 +78,6 @@
     .ul-lista{
         display: inline-block;
         list-style-type: none;
-    }
-    .section-principal{
-       
     }
     .li-lista{
         display: inline;

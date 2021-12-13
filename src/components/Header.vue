@@ -1,60 +1,56 @@
 <template>
     <header>
-      
-        <nav class="navbar navbar-light bg-light">
-            <a class="navbar-brand" href="#">
-                <img src="../assets/logo.png" width="30" height="30" alt="">
-            </a>
-            <a class="navbar-brand" href="#">Home</a>
-            <li class="navbar-brand dropdown" :class="{ active: isActiveGenero }" @click="dropdownClickGeneros()" @dblclick="dropagainGeneros()">
-                <a href="javascript:void(0)" class="dropbtn">Gêneros</a>
-                <div class="dropdown-content" :class="{ active: isActiveGenero }">
-                    <a href="#">Drama</a>
-                    <a href="#">Comédia</a>
-                    <a href="#">Terror</a>
-                </div>
-            </li>
-            <li class="navbar-brand dropdown" :class="{ active: isActiveCategoria }" @click="dropdownClickCategoria()" @dblclick="dropagainCategoria()">
-                <a href="javascript:void(0)" class="dropbtn">Categorias</a>
-                <div class="dropdown-content" :class="{ active: isActiveCategoria }">
-                    <a href="#">Filmes</a>
-                    <a href="#">Animes</a>
-                    <a href="#">Séries</a>
-                </div>
-            </li>
-            <a class="navbar-brand" href="#">Filmes</a>
-            <a class="navbar-brand" href="#">Séries</a>
-            
+        <div class="pos-f-t div-header" :class="{teste: isActive}">
+        <div :class="{ collapse: isActive}" id="navbarToggleExternalContent">
+            <div class="bg-danger p-4" :class="{teste: isActive}">     
+                <nav class="navbar navbar-expand-lg bg-li">
+                    <a href="#" class="navbar-brand text-white">Home</a>
+                    <ul class="navbar-nav">
+                        <li class="nav-item"> <a href="#" class="nav-link text-white">Categorias</a> </li>
+                    </ul>
+                    <div class="dropdown" >
+                        <button class="btn btn-danger dropdown-toggle" @click="clicouDropdown()" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Gêneros
+                        </button>
+                        <div class="dropdown-menu" :class="{ dropdownClick: isActiveDropdown }" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Comédia</a>
+                            <a class="dropdown-item" href="#">Drama</a>
+                            <a class="dropdown-item" href="#">Ação</a>
+                        </div>
+                    </div>
+                </nav>
+                <span class="text-white spannav">Toggleable via the navbar brand.</span>
+            </div>
+        </div>
+        <nav class="navbar navbar-dark bg-dark">
+            <button class="navbar-toggler" @click="clicou()" @dblclick="clicoudnv()" type="button" aria-label="Toggle navigation" style="margin-left: 1%;">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </nav>
+    </div>
     </header>
 </template>
 <script>
     export default{
         data(){
             return{
-                isActiveCategoria: false,
-                isActiveGenero: false
+                isActiveDropdown: false,
+                isActive: false
             }
         },
         methods:{  
-            dropdownClickCategoria(){
-                this.isActiveCategoria = true
+            clicou(){
+                this.isActive =! this.isActive
             },
-            dropagainCategoria(){
-                this.isActiveCategoria = false
-            },
-            dropdownClickGeneros(){
-                this.isActiveGenero = true
-            },
-            dropagainGeneros(){
-                this.isActiveGenero = false
-            },
+            clicouDropdown(){
+                this.isActiveDropdown =! this.isActiveDropdown
+            }
         }
     }
 </script>
 <style scoped>
     li a:hover, .dropdown:hover .dropbtn {
-        background-color: rgb(255, 255, 255);
+        background-color: none;
     }
 
     li.dropdown {
@@ -84,7 +80,29 @@
         display: block;
         height: 140px;
     }
+    #navbarToggleExternalContent{
+        transition: all .2s;
+    }
+    /* .collapse:active, #navbarToggleExternalContent:active{
+        transition: scale(1.2);
+    } */
+    .dropdownClick{
+        display: block;
+    }
     /* .dropdown:hover .dropdown-content {
         display: block;
     } */
+    .spannav{
+        opacity: 0.6;
+    }
+    .div-header{
+         transition: all .2s;
+        box-shadow: 0 4px 2px 2px rgb(32, 31, 31);
+    }
+    #navbarToggleExternalContent{
+        border-bottom:  2px solid rgb(72 53 53);
+    }
+   .teste{
+       transform: scale(1.01);
+   }
 </style>
