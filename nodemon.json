@@ -1,0 +1,10 @@
+{
+    "env" : {
+        "MYSQL_USER" : "root",
+        "MYSQL_PASSWORD": "password",
+        "MYSQL_DATABASE": "movies_project",
+        "MYSQL_HOST": "localhost",
+        "MYSQL_PORT":3306,
+        "JWT_KEY": "JWT_KEY-SECRET-KEY-07022002"
+    }
+}
