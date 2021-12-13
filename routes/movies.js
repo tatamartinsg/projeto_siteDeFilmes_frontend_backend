@@ -24,7 +24,7 @@ module.exports = app => {
         Movies.deleteMovie(id)
             .then(response => res.json({message: 'deletado com sucesso'}))
     })
-    app.patch('/tv/:coluna/:info', (req, res, next) => {
+    app.patch('/tv/:coluna/:info/:id', (req, res, next) => {
         const coluna = req.params.coluna
         const info = req.params.info
         Movies.updateMovies(coluna,info)

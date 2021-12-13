@@ -43,8 +43,8 @@ class Movies {
         const sql = `DELETE FROM movies_table WHERE id = '${id}';`
         return query(sql)
     }
-    updateMovies(coluna, info) {
-        const sql = `UPDATE movies_table SET ${coluna} = "${info}";`
+    updateMovies(coluna, info,id) {
+        const sql = `UPDATE movies_table SET ${coluna} = "${info}" WHERE id = '${id}';`
         return query(sql)
     }
 }
