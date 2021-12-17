@@ -2,8 +2,8 @@ const Movies = require('../repositories/movies.js')
 const upload = require('../middleware/uploadImage.js')
 module.exports = app => {
 
-    app.get('/tv', (req, res, next) => {
-        Movies.getFilmes()
+    app.get('/tv/series', (req, res, next) => {
+        Movies.getSeries()
             .then(response => {
                 res.json({response: response})
             })

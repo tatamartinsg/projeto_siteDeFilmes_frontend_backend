@@ -7,7 +7,7 @@ class CreateTable{
         this.createTableDB()
     }
     createTableDB(){
-        const sql = 'CREATE TABLE IF NOT EXISTS movies_table (id int NOT NULL AUTO_INCREMENT, name varchar(255), category varchar(30) NOT NULL, path varchar(255) NOT NULL, description varchar(255), tipo varchar(15), PRIMARY KEY(id));'
+        const sql = 'CREATE TABLE IF NOT EXISTS movies_table (id int NOT NULL AUTO_INCREMENT, name varchar(255), category varchar(255) NOT NULL, path varchar(255) NOT NULL, description varchar(350), tipo varchar(15), status varchar(15), PRIMARY KEY(id));'
         return query(sql)
     }
    

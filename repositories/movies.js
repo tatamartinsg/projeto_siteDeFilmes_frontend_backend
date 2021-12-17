@@ -6,7 +6,7 @@ class Movies {
     addFilme(body, res) {
         console.log('chegou aq')
         const query = `INSERT INTO movies_table SET ?;`
-        const novoFilme = { name: body.name, path: body.path, category: body.category }
+        const novoFilme = { name: body.name, path: body.path, category: body.category,tipo: body.tipo, description: body.description, status: body.status }
         conexao.query(query, novoFilme, erro => {
             if (erro) {
                 console.log(erro)
@@ -35,8 +35,8 @@ class Movies {
         //     }
         // })
     }
-    getFilmes() {
-        const sql = 'SELECT * FROM movies_table;'
+    getSeries() {
+        const sql = 'SELECT * FROM movies_table WHERE tipo = "série" ;'
         return query(sql)
     }
     deleteMovie(id) {
