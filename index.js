@@ -1,7 +1,7 @@
 const expressConfig = require('./config/express')
 const conexao = require('./infrastructure/conexao')
 const CreateTable = require('./infrastructure/createTable')
-const PORT = process.env.PORT || 8081
+const PORT = process.env.PORT || 8083
 
 conexao.connect(erro => {
     if(erro){
