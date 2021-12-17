@@ -67,7 +67,8 @@ export default {
 </script>
 <style scoped>
 .container{
-    margin-bottom: 2%;
+    margin-bottom: 3%;
+    width: 60%;
 }
 .carousel-inner, #__BVID__7___BV_inner_.carousel-inner{
     height: 100%;

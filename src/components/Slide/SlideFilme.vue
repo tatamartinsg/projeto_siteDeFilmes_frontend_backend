@@ -1,28 +1,10 @@
 <template>
-    <div>
-        {{entrou()}}
-      
-        <section class="search">
-            <div class="input-group mb-3">
-                    <input type="search" class="form-control filtro" @input="input = $event.target.value" placeholder="Filtre por parte do título" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        <button @click="clicou()"  class="btn btn-outline-danger botao" type="submit">Search</button>
-                    </div>
-            </div>
-            <div class="imageSearch" :class="{someImages: isActiveSearch}">
-                <ul class="ul-lista">
-                        <li class="slide li-lista teste2" v-for="foto in fotosComFiltro" :key="foto">
-                            <img clas v-if="foto.status == 'intrigantes'" class="img-lista teste2" :src="foto.path">
-                        </li>
-                </ul>
-            </div>
-        </section>
-        <section id="section-images" :class="{someImages: isActive}">
-        <h2 class="tituloImg">Séries intrigantes</h2>
+     <section id="section-images">
+        <h2 class="tituloImg">Filmes Top 1</h2>
         <div id="selectSlide">
             <div class="slideOne">         
-                <input @click="functionselectedItem1()" type="radio" class="opcao1 btn-check slide-controller"  autocomplete="off" name="slide" id="op1" checked />
-                <label class="btn btn-outline-danger opcao1" for="op1">
+                <input @click="functionselectedItem1()" type="radio" class="btn-check slide-controller2"  autocomplete="off" name="slide2" id="opp1" checked />
+                <label class="btn btn-outline-danger opcao1" for="opp1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="25" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
                     </svg>
@@ -30,78 +12,34 @@
 
             </div>
             <div class="slideTwo">
-                <input @click="functionselectedItem2()" type="radio" class="opcao2 btn-check slide-controller"  autocomplete="off" name="slide" id="op2"  />
-                <label class="btn btn-outline-danger" for="op2">
+                <input @click="functionselectedItem2()" type="radio" class=" btn-check slide-controller2"  autocomplete="off" name="slide2" id="opp2"  />
+                <label class="btn btn-outline-danger" for="opp2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="25" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                     </svg>
                 </label>
             </div>
         </div>
-        {{seila()}}
-        <div>
-            <!-- <div class="slide-show section-principal" >
-                <div class="slides-list" > 
-                    <ul class="ul-lista">
-                        <li class="slide li-lista" v-for="foto in fotosComFiltro" :key="foto">
-                            <img v-if="foto.status == 'intrigantes'" class="img-lista" :src="foto.path">
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="slide" >
-                        bbbbbbbbbbbbbbb
-                        </li>
-                    </ul>
-                </div>
-            </div> -->
-             <div class="slide-show section-principal" >
+        <div class="slide-show section-principal" >
                 <div class="slides-list teste " :class="{selectedItem1: selectedItem1, selectedItem2: selectedItem2}"  > 
                     <ul class="ul-lista">
-                        <li class="slide li-lista" v-for="(fotoBloco1) in firstBloco" :key="fotoBloco1">
-                            <img class="img-lista" :src="fotoBloco1.path">
+                        <li class="slide li-lista">
+                            aaaaaaaaaaaa
                         </li>
                     </ul>
                     <ul>
-                        <li class="slide li-lista" v-for="(fotoBloco2) in secondBloco" :key="fotoBloco2">
-                            <img class="img-lista" :src="fotoBloco2.path">
+                        <li class="slide li-lista">
+                            bbbbbbbbbb
                         </li>
                     </ul>
                     
                 </div>
-            </div>
         </div>
-            <!-- INPUT SEARCH -->
-            
-            <!-- <input type="radio" class="slide-controller checked opcao2" name="slide" id="op2" checked/>
-            <label class=" opcao2" for="op2">2</label>
-            <input type="radio" class="slide-controller " name="slide" id="op1"/>
-            <label class="" for="op1">  1 </label> -->
-           
-
-            
-            
-           
-        <slide-flix></slide-flix>
-        
-        <!-- <section class="section-principal"> 
-            <h2>Séries em alta</h2>
-            <ul class="ul-lista">
-                <li class="li-lista" v-for="foto in fotosComFiltro" :key="foto">
-                    <img v-if="foto.status == 'main' " class="img-lista" :src="foto.path">
-                </li>
-            </ul>
-        </section> -->
         </section>
-    </div>
 </template>
 <script>
-    import SlideFlix from './SlideFlix.vue'
-
-    export default{
-        components:{
-            'slide-flix': SlideFlix
-        },
-        props: ['fotos'],
+export default{
+props: ['fotos'],
         data(){
             return{
                 input: "",
@@ -111,25 +49,13 @@
                 secondBloco:[],
                 selectedItem1: true,
                 selectedItem2: false,
-                isActive: false,
-                isActiveSearch: true,
                 teste:"",
                 teste2: []
             }
          
         },
         methods:{
-            seila(){     
-                this.filtro = this.input
-                if(this.input == "" || this.input == 'undefined'){
-                    this.isActiveSearch = true
-                    this.isActive = false
-                }else{
-                    this.isActive = true
-                    this.isActiveSearch = false
-                }
-                
-            },
+           
             functionselectedItem1(){
                 this.selectedItem1 = true;
                 this.selectedItem2 = false;
@@ -147,19 +73,8 @@
             }
         
         },
-        computed:{
-            fotosComFiltro() {
-                if(this.filtro) {
-                    let exp = new RegExp(this.filtro.trim(), 'i');
-                    return this.fotos.filter(foto => exp.test(foto.name));
-                } else {
-                    return this.fotos;
-                }
-            },
-            
-        },
-
-    }
+       
+}
 </script>
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
@@ -208,11 +123,7 @@
         margin: 30px;
         padding: 5px;
     }
-    .input-group{
-        width: 600px;
-        height: 45px;
-        margin: 0 auto;
-    }
+   
     .botao{
         height: 45px;
     }
@@ -245,8 +156,8 @@ body{
   text-align: center;
 }
 
-.slide-controller:nth-child(1):checked ~ .slide-show .slides-list{--selected-item: 0;}
-.slide-controller:nth-child(2):checked ~ .slide-show .slides-list{--selected-item: 1;}
+.slide-controller2:nth-child(1):checked ~ .slide-show .slides-list{--selected-item: 0;}
+.slide-controller2:nth-child(2):checked ~ .slide-show .slides-list{--selected-item: 1;}
 
 .slide-show{
   overflow: hidden;

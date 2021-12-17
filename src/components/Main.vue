@@ -5,20 +5,26 @@
             <my-carousel :fotos="fotos" :status="index"></my-carousel>
         </div>
         <!-- <external-slide></external-slide> -->
+        <my-search :fotos="fotos"></my-search>
         <my-series :fotos="fotos"></my-series>
+        <my-filmes :fotos="fotos"></my-filmes>
     </div>
 </template>
 <script>
     import axios from 'axios'
     import Carousel from './Carousel/Carousel.vue'
     // import SlideCenter from './SlideCenter.vue'
-    import Series from './Series.vue'
+    import Slides from './Slide/SlideSérie.vue'
+    import Search from './Search/Search.vue'
+    import SlideFilme from './Slide/SlideFilme.vue'
 
     export default{
         components:{
             'my-carousel': Carousel,
             // 'external-slide': SlideCenter,
-            'my-series': Series
+            'my-series': Slides,
+            'my-search': Search,
+            'my-filmes': SlideFilme
         },
         data(){
             return{
