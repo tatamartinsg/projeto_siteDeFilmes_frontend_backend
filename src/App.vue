@@ -1,22 +1,27 @@
 <template>
-  <div>
-    <my-header> </my-header>
-    <div id="app">
-      <my-filmes> </my-filmes>
+<div>
+    <div>
+      <my-header> </my-header>
     </div>
-  </div>
+    <div id="app">
+      <my-main>
+         <my-filmes></my-filmes>
+      </my-main>
+    </div>
+</div>
+  
   
 </template>
 
 <script>
-import Filmes from './components/Filmes.vue'
 import Header from './components/Header.vue'
+import Main from './components/Main.vue'
 
 export default {
   name: 'App',
   components: {
-    'my-filmes': Filmes,
     'my-header': Header,
+    'my-main': Main
   }
 }
 </script>
@@ -28,6 +33,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 10%;
 }
+.carousel-inner{
+  height: 100%;
+}
+.sr-only{
+  display: none;
+}
+
 </style>
