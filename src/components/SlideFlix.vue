@@ -1,14 +1,6 @@
 <template>
     <div>
-        <!-- <input type="radio" class="btn-check slide-controller checked" name="slide" id="option1" autocomplete="off"/>
-        <input type="radio" class="btn-check slide-controller" name="slide" id="option2" autocomplete="off"/>
-        <input type="radio" class="btn-check slide-controller" name="slide" id="option3" autocomplete="off"/>
-        <input type="radio" class="btn-check slide-controller" name="slide" id="option4" autocomplete="off"/>
-      
-        <label class="btn btn-secondary" for="option2">1</label>
-         <label class="btn btn-secondary" for="option2">2</label>
-          <label class="btn btn-secondary" for="option2">3</label>
-            <label class="btn btn-secondary" for="option2">4</label> -->
+
         
     </div>
 </template>
@@ -31,5 +23,36 @@ export default{
 </script>
 
 <style scoped>
+    html, body{
+  margin: 0;
+}
 
+body{
+  text-align: center;
+}
+
+.slide-controller:nth-child(1):checked ~ .slide-show .slides-list{--selected-item: 0;}
+.slide-controller:nth-child(2):checked ~ .slide-show .slides-list{--selected-item: 1;}
+.slide-controller:nth-child(3):checked ~ .slide-show .slides-list{--selected-item: 2;}
+.slide-controller:nth-child(4):checked ~ .slide-show .slides-list{--selected-item: 3;}
+
+.slide-show{
+  overflow: hidden;
+}
+
+.slides-list{
+  --selected-item: 0;
+  --total-items: 4;
+  list-style-type: none;
+  margin: 10px 0;
+  padding: 0;
+  position: relative;
+  left: calc(var(--selected-item) * -100%);
+  width: calc(var(--total-items) * 100%);
+  transition: left 0.4s cubic-bezier(0.680, -0.550, 0.265, 1.550);
+  
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+}
 </style>

@@ -4,20 +4,20 @@
         <div>
             <my-carousel :fotos="fotos" :status="index"></my-carousel>
         </div>
-        <external-slide></external-slide>
+        <!-- <external-slide></external-slide> -->
         <my-series :fotos="fotos"></my-series>
     </div>
 </template>
 <script>
     import axios from 'axios'
     import Carousel from './Carousel/Carousel.vue'
-    import SlideCenter from './SlideCenter.vue'
+    // import SlideCenter from './SlideCenter.vue'
     import Series from './Series.vue'
 
     export default{
         components:{
             'my-carousel': Carousel,
-            'external-slide': SlideCenter,
+            // 'external-slide': SlideCenter,
             'my-series': Series
         },
         data(){
@@ -36,7 +36,7 @@
         },
         created(){
             console.log('entrou')
-            let promise = axios.get('http://localhost:8081/tv/series')
+            let promise = axios.get('http://localhost:8083/tv/series')
             promise.then(response => {
                 this.fotos = response.data.response
 
