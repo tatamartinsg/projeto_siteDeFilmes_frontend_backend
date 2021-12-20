@@ -1,8 +1,8 @@
 <template>
     <div>
-        {{entrou()}}
-        <section id="section-images">
-        <h2 class="tituloImg">Séries intrigantes</h2>
+        <section  id="section-images">
+        {{rotas}}
+        <h2 class="tituloImg" @click="entrou()">Séries intrigantes</h2>
         <div id="selectSlide">
             <div class="slideOne">         
                 <input @click="functionselectedItem1()" type="radio" class="opcao1 btn-check slide-controller"  autocomplete="off" name="slide" id="op1" checked />
@@ -25,84 +25,45 @@
         </div>
        
         <div>
-            <!-- <div class="slide-show section-principal" >
-                <div class="slides-list" > 
-                    <ul class="ul-lista">
-                        <li class="slide li-lista" v-for="foto in fotosComFiltro" :key="foto">
-                            <img v-if="foto.status == 'intrigantes'" class="img-lista" :src="foto.path">
-                        </li>
-                    </ul>
-                    <ul>
-                        <li class="slide" >
-                        bbbbbbbbbbbbbbb
-                        </li>
-                    </ul>
-                </div>
-            </div> -->
              <div class="slide-show section-principal" >
                 <div class="slides-list teste " :class="{selectedItem1: selectedItem1, selectedItem2: selectedItem2}"  > 
                     <ul class="ul-lista">
-                        <li class="slide li-lista" v-for="(fotoBloco1) in firstBloco" :key="fotoBloco1">
-                            <img class="img-lista" :src="fotoBloco1.path">
+                        <li class="slide li-lista" v-for="(fotoBloco1) in firstbloco" :key="fotoBloco1">
+                            <a @click="pegaId(fotoBloco1.id)" :href="'serie/'+fotoBloco1.id"><img v-if="fotoBloco1.status == 'intrigantes'" class="img-lista" :src="fotoBloco1.path"></a>
+                            <router-link :to="rotas" :id="fotoBloco1.id"></router-link>
                         </li>
                     </ul>
                     <ul>
-                        <li class="slide li-lista" v-for="(fotoBloco2) in secondBloco" :key="fotoBloco2">
-                            <img class="img-lista" :src="fotoBloco2.path">
+                        <li class="slide li-lista" v-for="(fotoBloco2) in secondbloco" :key="fotoBloco2">
+                            <img v-if="fotoBloco2.status == 'intrigantes'" class="img-lista" :src="fotoBloco2.path">
                         </li>
                     </ul>
                     
                 </div>
             </div>
         </div>
-            <!-- INPUT SEARCH -->
-            
-            <!-- <input type="radio" class="slide-controller checked opcao2" name="slide" id="op2" checked/>
-            <label class=" opcao2" for="op2">2</label>
-            <input type="radio" class="slide-controller " name="slide" id="op1"/>
-            <label class="" for="op1">  1 </label> -->
-           
-
-            
-            
-           
+        
         <slide-flix></slide-flix>
         
-        <!-- <section class="section-principal"> 
-            <h2>Séries em alta</h2>
-            <ul class="ul-lista">
-                <li class="li-lista" v-for="foto in fotosComFiltro" :key="foto">
-                    <img v-if="foto.status == 'main' " class="img-lista" :src="foto.path">
-                </li>
-            </ul>
-        </section> -->
         </section>
     </div>
 </template>
 <script>
-    // import SlideFlix from '../SlideFlix.vue'
+    // import axios from 'axios'
 
     export default{
-        // components:{
-        //     'slide-flix': SlideFlix
-        // },
-        props: ['fotos'],
+        props: ['firstbloco','secondbloco', 'rotas'],
         data(){
             return{
                 input: "",
                 filtro: "",
-                newFotos: [],
-                firstBloco:[],
-                secondBloco:[],
+                links: [],
                 selectedItem1: true,
                 selectedItem2: false,
-                teste:"",
-                teste2: []
+                teste: 'oi'
             }
-         
         },
         methods:{
-           
             functionselectedItem1(){
                 this.selectedItem1 = true;
                 this.selectedItem2 = false;
@@ -117,7 +78,14 @@
                 });
                 this.secondBloco = this.newFotos.splice(7,14)
                 this.firstBloco = this.newFotos.splice(0,7)
-            }
+            },
+            // pegaId(id){
+            //     alert('entrou')
+            //     const promiseId = axios.get(`http://localhost:8083/serie/${id}`)
+            //     promiseId.then( response => {
+            //         console.log(response)
+            //     })
+            // }
         
         },
        

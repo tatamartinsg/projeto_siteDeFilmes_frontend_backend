@@ -3,14 +3,12 @@
     <section class="search">
         <div class="input-group mb-3">
                 <input type="search" class="form-control filtro" @input="input = $event.target.value" placeholder="Filtre por parte do título" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                <!-- <div class="input-group-append">
-                    <button @click="seila"  class="btn btn-outline-danger botao" type="submit">Search</button>
-                </div> -->
         </div>
         <div class="imageSearch" :class="{someImages: isActiveSearch}">
+            <p>Você está buscando por: "{{input}}"</p>
             <ul class="ul-lista">
                 <li class="slide li-lista teste2" v-for="foto in fotosComFiltro" :key="foto">
-                    <img clas v-if="foto.status == 'intrigantes'" class="img-lista teste2" :src="foto.path">
+                    <img clas v-if="foto.status != 'em alta'" class="img-lista teste2" :src="foto.path">
                 </li>
             </ul>
         </div>
@@ -77,9 +75,6 @@
     padding-right: 50px;
     padding-left: 40px;
 }
-/* .ul-lista:hover{
-    left: 200px;
-} */
 .li-lista{
     display: inline;
     width: 100%;

@@ -3,11 +3,12 @@
         
         <div>
             <my-carousel :fotos="fotos" :status="index"></my-carousel>
+            {{rotas[1].path}}
         </div>
-        <!-- <external-slide></external-slide> -->
         <my-search :fotos="fotos"></my-search>
-        <my-series :fotos="fotos"></my-series>
-        <my-filmes :fotos="fotos"></my-filmes>
+        <my-filmes :firstbloco="filmes.firstbloco" :secondbloco="filmes.secondbloco"></my-filmes>
+
+        <my-series :rotas="rotas[1].path" :firstbloco="series.firstbloco" :secondbloco="series.secondbloco"></my-series>
     </div>
 </template>
 <script>
@@ -19,6 +20,11 @@
     import SlideFilme from './Slide/SlideFilme.vue'
 
     export default{
+        props:{
+            rotas:{
+                type:Array
+            }
+        },
         components:{
             'my-carousel': Carousel,
             // 'external-slide': SlideCenter,
@@ -29,36 +35,61 @@
         data(){
             return{
                 path:"",
+                fotos: [],
+                fotosFilmes: [],
                 fotosSeries: [],
                 filtro: "",
                 input: "",
                 index: [],
-                testeFor: {
-                    firstnine:[],
-                    secondnine:[]
+                series: {
+                    firstbloco:[],
+                    secondbloco:[]
+                },
+                filmes: {
+                    firstbloco:[],
+                    secondbloco:[]
                 }
             }
          
         },
         created(){
-            console.log('entrou')
-            let promise = axios.get('http://localhost:8083/tv/series')
-            promise.then(response => {
-                this.fotos = response.data.response
-
+            let promiseAll = axios.get('http://localhost:8083/tv/all')
+            promiseAll.then( responseAll => {
+                this.fotos = responseAll.data.response
                 for(var i = 0; i< this.fotos.length; i++){
                     if(this.fotos[i].status == 'em alta'){
                         this.index.push(i)
                     }
                  }
+                 //FILTRA SÉRIES 
+                 this.fotosSeries = this.fotos.filter((serie) => {
+                    return serie.tipo == 'série'
+                });
+                //FILTRA SERIES INTRIGANTES
+                this.fotosSeries = this.fotosSeries.filter((serieintrigante)=>{
+                    return serieintrigante.status == 'intrigantes'
+                });
+                //FILTRA FILMES
+                 this.fotosFilmes = this.fotos.filter((filme) => {
+                    return filme.tipo == 'filme'
+                });
+
+
+                if(this.fotosSeries.length > 7){
+                    this.series.firstbloco = this.fotosSeries.slice(0,7)
+                    this.series.secondbloco = this.fotosSeries.slice(7,14)
+                }
+                if(this.fotosFilmes.length > 7){
+                    this.filmes.firstbloco = this.fotosFilmes.slice(0,7)
+                    this.filmes.secondbloco = this.fotosFilmes.slice(7,14)
+                }
+                
             })
-                .catch(error => { console.log(error) })
+            
         },
         methods:{
             clicou(){
-                console.log(this.input)
                 this.filtro = this.input
-                console.log('deu', this.input, this.filtro)
             }
         },
         computed:{
@@ -89,9 +120,6 @@
         list-style-type: none;
         position: relative;
     }
-    /* .ul-lista:hover{
-        left: 200px;
-    } */
     .li-lista{
         display: inline;
         width: 100%;

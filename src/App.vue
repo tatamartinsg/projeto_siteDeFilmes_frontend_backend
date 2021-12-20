@@ -1,12 +1,12 @@
 <template>
 <div>
     <div>
-      <my-header> </my-header>
+      <my-header :rotas="routes"> </my-header>
     </div>
     <div id="app">
-      <my-main>
-         <my-filmes></my-filmes>
-      </my-main>
+      <transition name="page">
+         <router-view :rotas="routes"></router-view>
+      </transition>
     </div>
 </div>
   
@@ -14,14 +14,19 @@
 </template>
 
 <script>
+import {routes} from '../routes.js'
 import Header from './components/Header.vue'
-import Main from './components/Main.vue'
+// import Main from './components/Main.vue'
 
 export default {
   name: 'App',
   components: {
-    'my-header': Header,
-    'my-main': Main
+    'my-header': Header
+  },
+  data(){
+    return{
+      routes
+    }
   }
 }
 </script>

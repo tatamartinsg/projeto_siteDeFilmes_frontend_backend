@@ -13,7 +13,8 @@
     "bootstrap-sass": "^3.4.1",
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
-    "vue": "^2.6.14"
+    "vue": "^2.6.14",
+    "vue-router": "^3.5.3"
   },
   "devDependencies": {
     "@mdi/font": "^6.5.95",

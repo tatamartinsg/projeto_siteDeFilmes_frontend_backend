@@ -1,7 +1,9 @@
 <template>
-     <section id="section-images">
-        <h2 class="tituloImg">Filmes Top 1</h2>
-        <div id="selectSlide">
+
+     <section id="section-images2">
+        <h2  @click="clicouoi()" class="tituloImg">Filmes Top 1</h2>
+        <div>
+            <div id="selectSlide">
             <div class="slideOne">         
                 <input @click="functionselectedItem1()" type="radio" class="btn-check slide-controller2"  autocomplete="off" name="slide2" id="opp1" checked />
                 <label class="btn btn-outline-danger opcao1" for="opp1">
@@ -19,40 +21,36 @@
                     </svg>
                 </label>
             </div>
-        </div>
-        <div class="slide-show section-principal" >
+            <div class="slide-show section-principal2" >
+                
                 <div class="slides-list teste " :class="{selectedItem1: selectedItem1, selectedItem2: selectedItem2}"  > 
                     <ul class="ul-lista">
-                        <li class="slide li-lista">
-                            aaaaaaaaaaaa
+                        <li class="slide li-lista" v-for="filme in firstbloco" :key="filme">
+                            <img v-if="filme.tipo == 'filme'" class="img-lista" :src="filme.path">
                         </li>
                     </ul>
                     <ul>
                         <li class="slide li-lista">
-                            bbbbbbbbbb
+                            <li class="slide li-lista" v-for="filme in secondbloco" :key="filme">
+                            <img class="img-lista" :src="filme.path">
                         </li>
-                    </ul>
+                    </ul>   
                     
                 </div>
+            </div>
         </div>
+        </div>
+        
         </section>
 </template>
 <script>
 export default{
-props: ['fotos'],
+props: ['firstbloco', 'secondbloco'],
         data(){
             return{
-                input: "",
-                filtro: "",
-                newFotos: [],
-                firstBloco:[],
-                secondBloco:[],
                 selectedItem1: true,
                 selectedItem2: false,
-                teste:"",
-                teste2: []
             }
-         
         },
         methods:{
            
@@ -64,15 +62,8 @@ props: ['fotos'],
                 this.selectedItem1 = false;
                 this.selectedItem2 = true;
             },
-            entrou(){
-                  this.newFotos = this.fotos.filter((serie) => {
-                    return serie.status == 'intrigantes'
-                });
-                this.secondBloco = this.newFotos.splice(7,14)
-                this.firstBloco = this.newFotos.splice(0,7)
-            }
         
-        },
+        }
        
 }
 </script>
@@ -91,6 +82,7 @@ props: ['fotos'],
         text-decoration-color: rgba(255, 0, 0, 0.4); 
         text-decoration: underline;*/
     }
+    
     .someImages{
         display: none;
     }
@@ -188,7 +180,7 @@ body{
 }
 .slideOne, .slideTwo{
     position: absolute;
-    bottom: -130px;
+    /* bottom: -130px; */
     z-index: 1;
     display: flex;
     align-items: center;

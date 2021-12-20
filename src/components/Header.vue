@@ -4,7 +4,9 @@
         <div :class="{ collapse: isActive}" id="navbarToggleExternalContent">
             <div class=" div-third" :class="{teste: isActive}">     
                 <nav class="navbar navbar-expand-lg bg-li">
-                    <a href="#" class="navbar-brand text-white">Home</a>
+                     <div  v-for="rota in rotas" :key="rota">
+                        <router-link class="navbar-brand text-white" :to="rota.path">{{rota.titulo}}</router-link>
+                    </div>
                      <div class="dropdown" >
                         <button class="mudaCorBotao btn btn-danger dropdown-toggle" @click="clicouDropdownCategorias()" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Categorias
@@ -49,6 +51,12 @@
 </template>
 <script>
     export default{
+        props:{
+            rotas:{
+                type: Array,
+                required: true
+            }
+        },
         data(){
             return{
                 isActiveDropdown: false,
