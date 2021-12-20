@@ -35,8 +35,20 @@ class Movies {
         //     }
         // })
     }
+    getAll(){
+        const sql = 'SELECT * FROM movies_table;'
+        return query(sql)
+    }
     getSeries() {
         const sql = 'SELECT * FROM movies_table WHERE tipo = "série" ;'
+        return query(sql)
+    }
+    getFilmes() {
+        const sql = 'SELECT * FROM movies_table WHERE tipo = "filme" ;'
+        return query(sql)
+    }
+    getSerieById(id){
+        const sql = `SELECT * FROM movies_table WHERE id = ${id} ;`
         return query(sql)
     }
     deleteMovie(id) {

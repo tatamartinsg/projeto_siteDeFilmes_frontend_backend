@@ -1,7 +1,27 @@
 const Movies = require('../repositories/movies.js')
 const upload = require('../middleware/uploadImage.js')
 module.exports = app => {
-
+    app.get('/serie/:id',(req,res)=>{
+        console.log('entro')
+        const id = req.params.id
+        console.log(req.params)
+        Movies.getSerieById(id)
+        .then(response => {
+            res.json({response: response})
+        })
+        .catch(error => {
+            res.json({message: error})
+        })
+    })
+    app.get('/tv/all', (req,res,next) => {
+        Movies.getAll()
+            .then(response => {
+                res.json({response: response})
+            })
+            .catch(error => {
+                res.json({message: error})
+            })
+    })
     app.get('/tv/series', (req, res, next) => {
         Movies.getSeries()
             .then(response => {
@@ -11,7 +31,15 @@ module.exports = app => {
                 res.json({message: error})
             })
     })
-
+    app.get('/tv/filmes', (req, res, next) => {
+        Movies.getFilmes()
+            .then(response => {
+                res.json({response: response})
+            })
+            .catch(error => {
+                res.json({message: error})
+            })
+    })
     app.post('/tv', (req, res, next) => {
         const body = req.body
         console.log(body)
