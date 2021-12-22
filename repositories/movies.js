@@ -6,7 +6,7 @@ class Movies {
     addFilme(body, res) {
         console.log('chegou aq')
         const query = `INSERT INTO movies_table SET ?;`
-        const novoFilme = { name: body.name, path: body.path, category: body.category,tipo: body.tipo, description: body.description, status: body.status }
+        const novoFilme = { name: body.name, path: body.path, category: body.category,tipo: body.tipo, description: body.description, status: body.status, video: body.video }
         conexao.query(query, novoFilme, erro => {
             if (erro) {
                 console.log(erro)
@@ -48,6 +48,14 @@ class Movies {
         return query(sql)
     }
     getSerieById(id){
+        const sql = `SELECT * FROM movies_table WHERE id = ${id} ;`
+        return query(sql)
+    }
+    getMovieById(id){
+        const sql = `SELECT * FROM movies_table WHERE id = ${id} ;`
+        return query(sql)
+    }
+    getById(id){
         const sql = `SELECT * FROM movies_table WHERE id = ${id} ;`
         return query(sql)
     }

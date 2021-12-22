@@ -1,11 +1,11 @@
 const Movies = require('../repositories/movies.js')
 const upload = require('../middleware/uploadImage.js')
 module.exports = app => {
-    app.get('/serie/:id',(req,res)=>{
+    app.get('/tv/id/:id',(req,res)=>{
         console.log('entro')
         const id = req.params.id
         console.log(req.params)
-        Movies.getSerieById(id)
+        Movies.getById(id)
         .then(response => {
             res.json({response: response})
         })
@@ -13,6 +13,17 @@ module.exports = app => {
             res.json({message: error})
         })
     })
+    // app.get('/filme/:id', (req, res) => {
+    //     const id = req.params.id
+    //     console.log("entrou filme!")
+    //     Movies.getMovieById(id)
+    //     .then(response => {
+    //         res.json({response: response})
+    //     })
+    //     .catch(error => {
+    //         res.json({message: error})
+    //     })
+    // })
     app.get('/tv/all', (req,res,next) => {
         Movies.getAll()
             .then(response => {
