@@ -5,7 +5,7 @@
                 <input type="search" class="form-control filtro" @input="input = $event.target.value" placeholder="Filtre por parte do título" aria-label="Recipient's username" aria-describedby="basic-addon2">
         </div>
         <div class="imageSearch" :class="{someImages: isActiveSearch}">
-            <p>Você está buscando por: "{{input}}"</p>
+            <p class="p-search">Você está buscando por: "{{input}}"</p>
             <ul class="ul-lista">
                 <li class="slide li-lista teste2" v-for="foto in fotosComFiltro" :key="foto">
                     <img clas v-if="foto.status != 'em alta'" class="img-lista teste2" :src="foto.path">
@@ -50,11 +50,11 @@
     }
 </script>
 <style scoped>
- .input-group{
+.input-group{
         width: 600px;
         height: 45px;
         margin: 0 auto;
-    }
+}
 .someImages{
     display: none;
 }
@@ -78,6 +78,8 @@
 .li-lista{
     display: inline;
     width: 100%;
-    
+}
+.p-search{
+    color: aliceblue;
 }
 </style>

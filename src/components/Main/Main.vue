@@ -1,23 +1,26 @@
 <template>
-    <div>
-        
-        <div>
-            <my-carousel :fotos="fotos" :status="index"></my-carousel>
-            {{rotas[1].path}}
-        </div>
-        <my-search :fotos="fotos"></my-search>
-        <my-filmes :firstbloco="filmes.firstbloco" :secondbloco="filmes.secondbloco"></my-filmes>
+    <div  :class="{loading:loading}" >
+        <div :class="{time:time}">
+            <div >
+                <my-carousel :rotas="rotas[1].path" :fotos="fotos" :status="index"></my-carousel>
+            </div>
+            <my-search :fotos="fotos"></my-search>
+            <my-filmes :rotas="rotas[1].path" :firstbloco="filmes.firstbloco" :secondbloco="filmes.secondbloco"></my-filmes>
 
-        <my-series :rotas="rotas[1].path" :firstbloco="series.firstbloco" :secondbloco="series.secondbloco"></my-series>
+            <my-series :rotas="rotas[1].path" :firstbloco="series.firstbloco" :secondbloco="series.secondbloco"></my-series>
+
+            <my-animes :rotas="rotas[1].path" :firstbloco="animes.firstbloco" :secondbloco="animes.secondbloco"></my-animes>
+        </div>
     </div>
 </template>
 <script>
     import axios from 'axios'
     import Carousel from './Carousel/Carousel.vue'
     // import SlideCenter from './SlideCenter.vue'
-    import Slides from './Slide/SlideSérie.vue'
+    import SlideSerie from './Slide/SlideSérie.vue'
     import Search from './Search/Search.vue'
     import SlideFilme from './Slide/SlideFilme.vue'
+    import SlideAnimes from './Slide/SlideAnime.vue'
 
     export default{
         props:{
@@ -28,19 +31,21 @@
         components:{
             'my-carousel': Carousel,
             // 'external-slide': SlideCenter,
-            'my-series': Slides,
+            'my-series': SlideSerie,
             'my-search': Search,
-            'my-filmes': SlideFilme
+            'my-filmes': SlideFilme,
+            'my-animes': SlideAnimes
         },
         data(){
             return{
                 path:"",
                 fotos: [],
-                fotosFilmes: [],
-                fotosSeries: [],
                 filtro: "",
                 input: "",
                 index: [],
+                fotosSeries: [],
+                fotosFilmes: [],
+                fotosAnimes: [],
                 series: {
                     firstbloco:[],
                     secondbloco:[]
@@ -48,11 +53,22 @@
                 filmes: {
                     firstbloco:[],
                     secondbloco:[]
-                }
+                },
+                animes:{
+                    firstbloco:[],
+                    secondbloco:[]
+                },
+                time: true,
+                loading: true
             }
          
         },
         created(){
+
+            setTimeout(()=>{
+                this.time = false;
+                this.loading = false;
+            },1000)
             let promiseAll = axios.get('http://localhost:8083/tv/all')
             promiseAll.then( responseAll => {
                 this.fotos = responseAll.data.response
@@ -61,20 +77,38 @@
                         this.index.push(i)
                     }
                  }
-                 //FILTRA SÉRIES 
-                 this.fotosSeries = this.fotos.filter((serie) => {
-                    return serie.tipo == 'série'
+                  //FILTRA SÉRIES 
+                this.searchSerie()
+
+                 //FILTRA FILMES
+                this.searchFilme()
+             
+                //FILTRA ANIMES
+                this.searchAnimes()
+                //divide em blocos
+                this.shareInBlocks()
+                
+                
+            })
+            
+        },
+        methods:{
+            searchSerie(){
+                this.fotosSeries = this.fotos.filter((serieintrigante)=>{
+                    return serieintrigante.status == 'intrigantes' && serieintrigante.tipo == 'série'
                 });
-                //FILTRA SERIES INTRIGANTES
-                this.fotosSeries = this.fotosSeries.filter((serieintrigante)=>{
-                    return serieintrigante.status == 'intrigantes'
-                });
-                //FILTRA FILMES
+            },
+            searchFilme(){
                  this.fotosFilmes = this.fotos.filter((filme) => {
                     return filme.tipo == 'filme'
                 });
-
-
+            },
+            searchAnimes(){
+                this.fotosAnimes = this.fotos.filter((animes)=>{
+                    return animes.tipo == 'anime'
+                })
+            },
+            shareInBlocks(){
                 if(this.fotosSeries.length > 7){
                     this.series.firstbloco = this.fotosSeries.slice(0,7)
                     this.series.secondbloco = this.fotosSeries.slice(7,14)
@@ -83,13 +117,10 @@
                     this.filmes.firstbloco = this.fotosFilmes.slice(0,7)
                     this.filmes.secondbloco = this.fotosFilmes.slice(7,14)
                 }
-                
-            })
-            
-        },
-        methods:{
-            clicou(){
-                this.filtro = this.input
+                if(this.fotosAnimes.length > 7){
+                    this.animes.firstbloco = this.fotosAnimes.slice(0,7)
+                    this.animes.firstbloco = this.fotosAnimes.slice(0,7)
+                }
             }
         },
         computed:{
@@ -105,7 +136,23 @@
     }
 </script>
 <style scoped>
-    
+    .time{
+        display: none;
+    }
+    .loading{
+        animation: is-rotating 1s infinite;
+        border: 6px solid #c2b7b7;
+        border-radius: 50%;
+        border-top-color: #be3636;
+        height: 50px;
+        width: 50px;
+        margin: 0 auto;
+    }
+    @keyframes is-rotating {
+        to {
+            transform: rotate(1turn);
+        }
+    }
     .img-lista{
         width: 150px;
         height: 220px;
@@ -186,5 +233,9 @@
 
     .slide{
         width: 100%;
+    }
+    .img-div{
+        border-radius: 20px;
+        box-shadow: 1px 1px 1px 4px #fdf4f4;
     }
 </style>

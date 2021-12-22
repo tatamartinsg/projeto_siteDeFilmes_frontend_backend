@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import {routes} from '../routes.js'
-import Header from './components/Header.vue'
+import { routes } from './routes.js'
+import Header from './utils/Header/Header.vue'
 // import Main from './components/Main.vue'
 
 export default {

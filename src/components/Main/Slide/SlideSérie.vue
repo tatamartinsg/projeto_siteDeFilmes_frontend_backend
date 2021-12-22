@@ -1,12 +1,12 @@
 <template>
-
-     <section id="section-images2">
-        <h2  @click="clicouoi()" class="tituloImg">Filmes Top 1</h2>
-        <div>
-            <div id="selectSlide">
+    <div>
+        <section  id="section-images">
+    
+        <h2 class="tituloImg" >Séries intrigantes</h2>
+        <div id="selectSlide">
             <div class="slideOne">         
-                <input @click="functionselectedItem1()" type="radio" class="btn-check slide-controller2"  autocomplete="off" name="slide2" id="opp1" checked />
-                <label class="btn btn-outline-danger opcao1" for="opp1">
+                <input @click="functionselectedItem1()" type="radio" class="opcao1 btn-check slide-controller"  autocomplete="off" name="slide" id="op1" checked />
+                <label class="btn btn-outline-danger opcao1" for="op1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="25" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
                     </svg>
@@ -14,46 +14,55 @@
 
             </div>
             <div class="slideTwo">
-                <input @click="functionselectedItem2()" type="radio" class=" btn-check slide-controller2"  autocomplete="off" name="slide2" id="opp2"  />
-                <label class="btn btn-outline-danger" for="opp2">
+                <input @click="functionselectedItem2()" type="radio" class="opcao2 btn-check slide-controller"  autocomplete="off" name="slide" id="op2"  />
+                <label class="btn btn-outline-danger" for="op2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="25" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
                     </svg>
                 </label>
             </div>
-            <div class="slide-show section-principal2" >
-                
+            
+        </div>
+       
+        <div>
+             <div class="slide-show section-principal" >
                 <div class="slides-list teste " :class="{selectedItem1: selectedItem1, selectedItem2: selectedItem2}"  > 
                     <ul class="ul-lista">
-                        <li class="slide li-lista" v-for="filme in firstbloco" :key="filme">
-                            <img v-if="filme.tipo == 'filme'" class="img-lista" :src="filme.path">
+                        <li class="slide li-lista" v-for="(fotoBloco1) in firstbloco" :key="fotoBloco1">
+                            <a :href="'tv/id/'+fotoBloco1.id"><img v-if="fotoBloco1.status == 'intrigantes'" class="img-lista" :src="fotoBloco1.path"></a>
+                            <router-link :to="rotas" :id="fotoBloco1.id"></router-link>
                         </li>
                     </ul>
                     <ul>
-                        <li class="slide li-lista">
-                            <li class="slide li-lista" v-for="filme in secondbloco" :key="filme">
-                            <img class="img-lista" :src="filme.path">
+                        <li class="slide li-lista" v-for="(fotoBloco2) in secondbloco" :key="fotoBloco2">
+                            <a :href="'tv/id/'+fotoBloco2.id"> <img v-if="fotoBloco2.status == 'intrigantes'" class="img-lista" :src="fotoBloco2.path"></a>                   
                         </li>
-                    </ul>   
-                    
+                    </ul>
                 </div>
             </div>
         </div>
-        </div>
+        
+        <slide-flix></slide-flix>
         
         </section>
+    </div>
 </template>
 <script>
-export default{
-props: ['firstbloco', 'secondbloco'],
+    // import axios from 'axios'
+
+    export default{
+        props: ['firstbloco','secondbloco', 'rotas'],
         data(){
             return{
+                input: "",
+                filtro: "",
+                links: [],
                 selectedItem1: true,
                 selectedItem2: false,
+                teste: 'oi'
             }
         },
         methods:{
-           
             functionselectedItem1(){
                 this.selectedItem1 = true;
                 this.selectedItem2 = false;
@@ -62,10 +71,25 @@ props: ['firstbloco', 'secondbloco'],
                 this.selectedItem1 = false;
                 this.selectedItem2 = true;
             },
+            entrou(){
+                  this.newFotos = this.fotos.filter((serie) => {
+                    return serie.status == 'intrigantes'
+                });
+                this.secondBloco = this.newFotos.splice(7,14)
+                this.firstBloco = this.newFotos.splice(0,7)
+            },
+            // pegaId(id){
+            //     alert('entrou')
+            //     const promiseId = axios.get(`http://localhost:8083/serie/${id}`)
+            //     promiseId.then( response => {
+            //         console.log(response)
+            //     })
+            // }
         
-        }
+        },
        
-}
+
+    }
 </script>
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
@@ -82,7 +106,6 @@ props: ['firstbloco', 'secondbloco'],
         text-decoration-color: rgba(255, 0, 0, 0.4); 
         text-decoration: underline;*/
     }
-    
     .someImages{
         display: none;
     }
@@ -148,8 +171,8 @@ body{
   text-align: center;
 }
 
-.slide-controller2:nth-child(1):checked ~ .slide-show .slides-list{--selected-item: 0;}
-.slide-controller2:nth-child(2):checked ~ .slide-show .slides-list{--selected-item: 1;}
+.slide-controller:nth-child(1):checked ~ .slide-show .slides-list{--selected-item: 0;}
+.slide-controller:nth-child(2):checked ~ .slide-show .slides-list{--selected-item: 1;}
 
 .slide-show{
   overflow: hidden;
@@ -180,7 +203,7 @@ body{
 }
 .slideOne, .slideTwo{
     position: absolute;
-    /* bottom: -130px; */
+    bottom: -130px;
     z-index: 1;
     display: flex;
     align-items: center;

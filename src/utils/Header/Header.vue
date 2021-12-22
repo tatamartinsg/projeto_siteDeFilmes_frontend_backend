@@ -13,7 +13,7 @@
                         </button>
                         <div class="dropdown-menu" :class="{ dropdownClick: isActiveDropdownCategorias }" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="#">Animes</a>
-                            <a class="dropdown-item" href="#">Documentários</a>
+                            <!-- <a class="dropdown-item" href="#">Documentários</a> -->
                             <a class="dropdown-item" href="#">Filmes</a>
                             <a class="dropdown-item" href="#">Séries</a>
                         </div>
