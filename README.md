@@ -1,6 +1,6 @@
-# projeto API de filmes feita utilizando Node.js, Express e MySQL
+## Projeto API de filmes feita utilizando Node.js, Express e MySQL
 
-## Project setup
+### Project setup
 ```
 npm install
 ```
