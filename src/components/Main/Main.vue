@@ -4,24 +4,18 @@
             <div >
                 <my-carousel :rotas="rotas[1].path" :fotos="fotos" :status="index"></my-carousel>
             </div>
-            <!-- <external-slide> </external-slide> -->
-            <my-search :fotos="fotos"></my-search>
-            <my-filmes :rotas="rotas[1].path" :firstbloco="filmes.firstbloco" :secondbloco="filmes.secondbloco"></my-filmes>
-
-            <my-series :rotas="rotas[1].path" :firstbloco="series.firstbloco" :secondbloco="series.secondbloco"></my-series>
-
-            <my-animes :rotas="rotas[1].path" :firstbloco="animes.firstbloco" :secondbloco="animes.secondbloco"></my-animes>
+            <my-search :fotos="fotos" />
+            <slides-geral :title="'Filmes top 1'" :nameSlide="'filmes'" :rotas="rotas[1].path" :firstbloco="filmes.firstbloco" :secondbloco="filmes.secondbloco"> </slides-geral>
+            <slides-geral :title="'Series intrigantes'" :nameSlide="'series'" :rotas="rotas[1].path" :firstbloco="series.firstbloco" :secondbloco="series.secondbloco"> </slides-geral>
+            <slides-geral :title="'Animes mais assistidos'" :nameSlide="'animes'" :rotas="rotas[1].path" :firstbloco="animes.firstbloco" :secondbloco="animes.secondbloco"> </slides-geral>
         </div>
     </div>
 </template>
 <script>
     import axios from 'axios'
     import Carousel from './Carousel/Carousel.vue'
-    // import SlideCenter from '../SlideCenter.vue'
-    import SlideSerie from './Slide/SlideSérie.vue'
+    import SlideGeral from './Slide/SlideGeral.vue'
     import Search from './Search/Search.vue'
-    import SlideFilme from './Slide/SlideFilme.vue'
-    import SlideAnimes from './Slide/SlideAnime.vue'
 
     export default{
         props:{
@@ -31,11 +25,8 @@
         },
         components:{
             'my-carousel': Carousel,
-            // 'external-slide': SlideCenter,
-            'my-series': SlideSerie,
-            'my-search': Search,
-            'my-filmes': SlideFilme,
-            'my-animes': SlideAnimes
+            'slides-geral': SlideGeral,
+            'my-search': Search
         },
         data(){
             return{
@@ -53,7 +44,8 @@
                 },
                 filmes: {
                     firstbloco:[],
-                    secondbloco:[]
+                    secondbloco:[],
+                    title: ""
                 },
                 animes:{
                     firstbloco:[],
@@ -83,7 +75,6 @@
 
                  //FILTRA FILMES
                 this.searchFilme()
-             
                 //FILTRA ANIMES
                 this.searchAnimes()
                 //divide em blocos

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import bootstrap from './bootstrap.js'
+import bootstrap from '../node_modules/bootstrap/dist/css/bootstrap.css';
 import {BootstrapVue} from 'bootstrap-vue'
 import VueRouter from 'vue-router'
 import {routes} from './routes.js'
