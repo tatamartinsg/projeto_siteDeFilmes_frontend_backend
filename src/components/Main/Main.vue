@@ -4,6 +4,7 @@
             <div >
                 <my-carousel :rotas="rotas[1].path" :fotos="fotos" :status="index"></my-carousel>
             </div>
+            <!-- <external-slide> </external-slide> -->
             <my-search :fotos="fotos"></my-search>
             <my-filmes :rotas="rotas[1].path" :firstbloco="filmes.firstbloco" :secondbloco="filmes.secondbloco"></my-filmes>
 
@@ -16,7 +17,7 @@
 <script>
     import axios from 'axios'
     import Carousel from './Carousel/Carousel.vue'
-    // import SlideCenter from './SlideCenter.vue'
+    // import SlideCenter from '../SlideCenter.vue'
     import SlideSerie from './Slide/SlideSérie.vue'
     import Search from './Search/Search.vue'
     import SlideFilme from './Slide/SlideFilme.vue'
@@ -95,17 +96,17 @@
         methods:{
             searchSerie(){
                 this.fotosSeries = this.fotos.filter((serieintrigante)=>{
-                    return serieintrigante.status == 'intrigantes' && serieintrigante.tipo == 'série'
+                    return serieintrigante.status == 'intrigantes' && serieintrigante.category == 'série'
                 });
             },
             searchFilme(){
                  this.fotosFilmes = this.fotos.filter((filme) => {
-                    return filme.tipo == 'filme'
+                    return filme.category == 'filme'
                 });
             },
             searchAnimes(){
                 this.fotosAnimes = this.fotos.filter((animes)=>{
-                    return animes.tipo == 'anime'
+                    return animes.category == 'anime'
                 })
             },
             shareInBlocks(){
@@ -119,7 +120,7 @@
                 }
                 if(this.fotosAnimes.length > 7){
                     this.animes.firstbloco = this.fotosAnimes.slice(0,7)
-                    this.animes.firstbloco = this.fotosAnimes.slice(0,7)
+                    this.animes.secondbloco = this.fotosAnimes.slice(7,14)
                 }
             }
         },

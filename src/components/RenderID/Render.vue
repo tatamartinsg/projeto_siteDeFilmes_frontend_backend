@@ -7,16 +7,16 @@
             <div class="description" >
                 <h1 :class="{classTitle: classTitle}" class="h1-titulo" >{{data[0].name}}</h1>
                 <p>{{data[0].description}}</p>
-                <p class="p-categoria">Categoria: {{data[0].category}}</p>
+                <p class="p-categoria">Gêneros: {{data[0].gender}}</p>
                 <div class="div-video" >
-                    <iframe v-if="((data[0].video != 'no video') && (isEmAlta == false))" class="video" align="center" width="540" height="300" :src="data[0].video" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe v-if="((data[0].url_video != 'no video') && (isEmAlta == false))" class="video" align="center" width="540" height="300" :src="data[0].url_video" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             
             </div>
         </div>
         <div id="div-emalta" class="div-video" :class="{classVideo: classVideo}">
             <p>Não sei o que colocar aqui ainda</p>
-             <iframe v-if="data[0].video != 'no video'" class="video" align="center" width="540" height="300" :src="data[0].video" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+             <iframe v-if="data[0].url_video != 'no video'" class="video" align="center" width="540" height="300" :src="data[0].url_video" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
 </template>

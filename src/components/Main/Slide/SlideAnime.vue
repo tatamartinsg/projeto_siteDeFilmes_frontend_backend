@@ -119,7 +119,7 @@ export default{
 }
 .slideOne, .slideTwo{
     position: absolute;
-    /* bottom: -130px; */
+    bottom: -130px;
     z-index: 1;
     display: flex;
     align-items: center;

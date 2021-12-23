@@ -26,7 +26,7 @@
                 <div class="slides-list teste " :class="{selectedItem1: selectedItem1, selectedItem2: selectedItem2}"  > 
                     <ul class="ul-lista">
                         <li class="slide li-lista" v-for="filme in firstbloco" :key="filme">
-                            <a :href="'tv/id/'+filme.id"><img v-if="filme.tipo == 'filme'" class="img-lista" :src="filme.path"></a>
+                            <a :href="'tv/id/'+filme.id"><img v-if="filme.category == 'filme'" class="img-lista" :src="filme.path"></a>
                             <router-link :to="rotas" :id="filme.id"></router-link>
                         </li>
                     </ul>
@@ -182,7 +182,7 @@ props: ['firstbloco', 'secondbloco'],
     }
     .slideOne, .slideTwo{
         position: absolute;
-        /* bottom: -130px; */
+        bottom: 130px;
         z-index: 1;
         display: flex;
         align-items: center;

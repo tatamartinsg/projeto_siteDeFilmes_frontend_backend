@@ -5,17 +5,21 @@
             <div class=" div-third" :class="{teste: isActive}">     
                 <nav class="navbar navbar-expand-lg bg-li">
                      <div  v-for="rota in rotas" :key="rota">
-                        <router-link class="navbar-brand text-white" :to="rota.path">{{rota.titulo}}</router-link>
+                        <router-link class="home navbar-brand text-white" :to="rota.path">{{rota.titulo}}</router-link>
                     </div>
                      <div class="dropdown" >
                         <button class="mudaCorBotao btn btn-danger dropdown-toggle" @click="clicouDropdownCategorias()" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Categorias
                         </button>
                         <div class="dropdown-menu" :class="{ dropdownClick: isActiveDropdownCategorias }" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Animes</a>
+                            <a class="dropdown-item" href="/tv/animes">Animes</a>
+                            <router-link :to="rotas" :category="animes"></router-link>
                             <!-- <a class="dropdown-item" href="#">Documentários</a> -->
-                            <a class="dropdown-item" href="#">Filmes</a>
-                            <a class="dropdown-item" href="#">Séries</a>
+                            <a class="dropdown-item" href="/tv/filmes">Filmes</a>
+                            <router-link :to="rotas" :category="filmes"></router-link>
+
+                            <a class="dropdown-item" href="/tv/series">Séries</a>
+                            <router-link :to="rotas" :category="series"></router-link>
                         </div>
                     </div>
                     <div class="dropdown" >
@@ -23,18 +27,41 @@
                             Gêneros
                         </button>
                         <div class="dropdown-menu" :class="{ dropdownClick: isActiveDropdown }" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Ação</a>
-                            <a class="dropdown-item" href="#">Adolescente</a>
-                            <a class="dropdown-item" href="#">Aventura</a>
-                            <a class="dropdown-item" href="#">Comédia</a>
-                            <a class="dropdown-item" href="#">Drama</a>
-                            <a class="dropdown-item" href="#">Família</a>
-                            <a class="dropdown-item" href="#">Horror</a>
-                            <a class="dropdown-item" href="#">Infantl</a>
-                            <a class="dropdown-item" href="#">Medicina</a>
-                            <a class="dropdown-item" href="#">Policial</a>
-                            <a class="dropdown-item" href="#">Romance</a>
-                            <a class="dropdown-item" href="#">Terror</a>
+                            <a class="dropdown-item" href="/tv/genero/ação">Ação</a>
+                            <router-link :to="rotas" :gender="ação"></router-link>
+
+                            <a class="dropdown-item" href="/tv/genero/adolescente">Adolescente</a>
+                            <router-link :to="rotas" :gender="adolescente"></router-link>
+                            
+                            <a class="dropdown-item" href="/tv/genero/aventura">Aventura</a>
+                            <router-link :to="rotas" :gender="aventura"></router-link>
+                            
+                            <a class="dropdown-item" href="/tv/genero/comédia">Comédia</a>
+                            <router-link :to="rotas" :gender="comédia"></router-link>
+                            
+                            <a class="dropdown-item" href="/tv/genero/drama">Drama</a>
+                            <router-link :to="rotas" :gender="drama"></router-link>
+
+                            <a class="dropdown-item" href="/tv/genero/família">Família</a>
+                            <router-link :to="rotas" :gender="família"></router-link>
+
+                            <a class="dropdown-item" href="/tv/genero/horror">Horror</a>
+                            <router-link :to="rotas" :gender="horror"></router-link>
+
+                            <a class="dropdown-item" href="/tv/genero/infantil">Infantil</a>
+                            <router-link :to="rotas" :gender="infantil"></router-link>
+
+                            <a class="dropdown-item" href="/tv/genero/medicina">Medicina</a>
+                             <router-link :to="rotas" :gender="medicina"></router-link>
+
+                            <a class="dropdown-item" href="/tv/genero/policial">Policial</a>
+                             <router-link :to="rotas" :gender="policial"></router-link>
+
+                            <a class="dropdown-item" href="/tv/genero/romance">Romance</a>
+                             <router-link :to="rotas" :gender="romance"></router-link>
+
+                            <a class="dropdown-item" href="/tv/genero/terror">Terror</a>
+                             <router-link :to="rotas" :gender="terror"></router-link>
                         </div>
                     </div>
                 </nav>
@@ -80,6 +107,9 @@
 <style scoped>
     li a:hover, .dropdown:hover .dropbtn {
         background-color: none;
+    }
+    .navbar{
+        justify-content: flex-start;
     }
 
     li.dropdown {
@@ -157,4 +187,8 @@
    .navbar-toggler{
        margin-top: 5px;
    }
+   .navbar-brand{
+       margin-right: 5px;
+   }
+
 </style>

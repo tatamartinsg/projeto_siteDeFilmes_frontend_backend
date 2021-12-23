@@ -8,7 +8,9 @@
             <p class="p-search">Você está buscando por: "{{input}}"</p>
             <ul class="ul-lista">
                 <li class="slide li-lista teste2" v-for="foto in fotosComFiltro" :key="foto">
-                    <img clas v-if="foto.status != 'em alta'" class="img-lista teste2" :src="foto.path">
+                    
+                    <a :href="'../../tv/id/'+foto.id"><img clas v-if="foto.status != 'em alta'" class="img-lista teste2" :src="foto.path"></a>
+                    <router-link :to="rotas" :id="foto.id"></router-link>
                 </li>
             </ul>
         </div>
