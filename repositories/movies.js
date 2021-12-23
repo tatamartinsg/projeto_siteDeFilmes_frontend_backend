@@ -40,11 +40,15 @@ class Movies {
         return query(sql)
     }
     getSeries() {
-        const sql = 'SELECT * FROM movies_table WHERE tipo = "série" ;'
+        const sql = 'SELECT * FROM movies_table WHERE category = "série" ;'
         return query(sql)
     }
     getFilmes() {
-        const sql = 'SELECT * FROM movies_table WHERE tipo = "filme" ;'
+        const sql = 'SELECT * FROM movies_table WHERE category = "filme" ;'
+        return query(sql)
+    }
+    getAnimes() {
+        const sql = 'SELECT * FROM movies_table WHERE category = "anime" ;'
         return query(sql)
     }
     getSerieById(id){
@@ -59,6 +63,11 @@ class Movies {
         const sql = `SELECT * FROM movies_table WHERE id = ${id} ;`
         return query(sql)
     }
+     getByGender(gender){
+        const sql = `SELECT * FROM movies_table WHERE gender = '${gender}' ;`
+        return query(sql)
+    }
+    
     deleteMovie(id) {
         const sql = `DELETE FROM movies_table WHERE id = '${id}';`
         return query(sql)

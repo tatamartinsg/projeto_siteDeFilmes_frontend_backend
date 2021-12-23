@@ -13,17 +13,16 @@ module.exports = app => {
             res.json({message: error})
         })
     })
-    // app.get('/filme/:id', (req, res) => {
-    //     const id = req.params.id
-    //     console.log("entrou filme!")
-    //     Movies.getMovieById(id)
-    //     .then(response => {
-    //         res.json({response: response})
-    //     })
-    //     .catch(error => {
-    //         res.json({message: error})
-    //     })
-    // })
+    app.get('/tv/genero/:gender', (req, res, next) => {
+        const gender = req.params.gender
+        Movies.getByGender(gender)
+        .then(response => {
+            res.json({response: response})
+        })
+        .catch(error => {
+            res.json({message: error})
+        })
+    })
     app.get('/tv/all', (req,res,next) => {
         Movies.getAll()
             .then(response => {
@@ -50,6 +49,15 @@ module.exports = app => {
             .catch(error => {
                 res.json({message: error})
             })
+    })
+    app.get('/tv/animes', (req, res, next) => {
+        Movies.getAnimes()
+        .then(response => {
+            res.json({response: response})
+        })
+        .catch(error => {
+            res.json({message: error})
+        })
     })
     app.post('/tv', (req, res, next) => {
         const body = req.body
