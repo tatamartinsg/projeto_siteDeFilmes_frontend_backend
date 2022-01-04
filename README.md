@@ -1,5 +1,5 @@
 # filmes
-
+<img src="images/filmesAPI.gif">
 ## Project setup
 ```
 npm install
