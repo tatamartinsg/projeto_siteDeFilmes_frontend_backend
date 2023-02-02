@@ -1,0 +1,1 @@
+Criando um novo repositória para o projeto de filmes afim de juntar o frontend e o backend em 1 repositorio.
