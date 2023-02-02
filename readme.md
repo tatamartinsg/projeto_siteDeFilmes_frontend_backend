@@ -6,7 +6,7 @@
 
 
 
-## Project setup frontend
+## Project setup FrontEnd
 ```
 npm install
 ```
@@ -25,6 +25,18 @@ npm run build
 ```
 npm run lint
 ```
+## Projeto API de filmes feita utilizando Node.js, Express e MySQL
+
+### Project setup BackEnd
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm start
+```
+
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
